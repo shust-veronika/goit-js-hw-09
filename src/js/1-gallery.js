@@ -1,13 +1,6 @@
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-const lightbox = new SimpleLightbox(".gallery a", {
-  captions: true,
-  captionsData: "alt",
-  captionPosition: "bottom",
-  captionDelay: 250,
-});
-
 const images = [
   {
     preview:
@@ -75,3 +68,43 @@ const images = [
 ];
 
 
+
+const lightbox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+});
+
+
+const galleryEl = document.querySelector('.gallery');
+const galleryMurk = images
+ .map(
+    ({ preview, original, description }) => `
+    <li class="gallery-item">
+    <a class="gallery-link" href="${original}">
+    <img 
+    class="gallery-image"
+    src="${preview}"
+    alt="${description}"
+    />
+    </a>
+    </li>`
+ )
+ .join('');
+ galleryEl.insertAdjacentHTML('beforeend', galleryMurk);
+//  galleryEl.addEventListener('click', onGalleryClik);
+//  function onGalleryClik(event) {
+//     event.preventDefault();
+//     const isImg = event.target.classList.contains('gallery-image');
+//     if (!isImg) return;
+//     const larImageUrl = event.target.dataset.source;
+//     const insta = basicLightbox.create(`
+//         <img src="${larImageUrl}" width="800" alt="${event.target.alt}">
+//         `);
+//         insta.show();
+//  }
+new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+  captionPosition: "bottom",
+});
